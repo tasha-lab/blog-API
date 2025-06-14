@@ -93,7 +93,14 @@ app.get(`/posts`, async (req,res) => {
     try {
         const posts = await client.posts.findMany({
             include: {
-                user:true
+                user:{
+                    select:{
+                        f_name:true,
+                        l_name:true,
+                        email:true,
+                        username:true
+                    }
+                }
             }
         })
         return res.status(201).json({
